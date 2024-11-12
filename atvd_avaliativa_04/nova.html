@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <img src="pref_sp.png" id="logo_pref"> <br> <br>
+    <img src="portal.png" id="novo_sol"> <br>
+    <div id="resultado"></div>
+    <h1>Nova Solicitação</h1>
+    <div id="formulario">
+        Nome completo:
+        <input type="text" id="caixaNome"> <br>
+        CPF:
+        <input type="text" id="caixaCPF"> <br>
+        E-mail:
+        <input type="email" id="caixaEmail"> <br>
+        Telefone:
+        <input type="text" id="caixaTelefone"> <br>
+        Setor responsável:
+        <select id="caixaSetor">
+            <option value="">Selecione</option>
+            <option value="Finanças">Finanças</option>
+            <option value="Administração">Administração</option>
+            <option value="Infraestrutura">Infraestrutura</option>
+        </select><br>
+    </div>
+    <div id="formulario2">
+        Detalhes da solicitação: <br>
+        <textarea id="caixaDetalhes"></textarea> <br><br>
+    </div>
+
+    <button id="btnCriar">Abrir protocolo</button>
+
+    <div id="carregando">
+        <img src="loading.gif"> <br>
+        Carregando...
+    </div>
+    <script>
+        $(document).ready(function(){
+            $("#carregando").hide();
+            $("#resultado").hide();
+        });
+        $("#novo_sol").click(function(){
+            $("#resultado").slideDown("slow");
+        });
+
+        $("#btnCriar").click(function(){
+            $("#carregando").show();
+            $("#resultado").hide();
+            var nome_cap = $("#caixaNome").val();
+            var cpf_cap = $("#caixaCPF").val();
+            var email_cap = $("#caixaEmail").val();
+            var telefone_cap = $("#caixaTelefone").val();
+            var setor_cap = $("#caixaSetor").val();
+            var detalhes_cap = $("#caixaDetalhes").val();
+
+            $.ajax({
+                url: "cadastrar.php",
+                method: "POST",
+                data: {nome: nome_cap,
+                       cpf: cpf_cap,
+                       email: email_cap,
+                       telefone: telefone_cap,
+                       setor: setor_cap,
+                       detalhes: detalhes_cap
+                       },
+                success: function(resposta){
+                    $("#carregando").hide();
+                    $("#resultado").html(resposta);
+                    $("#resultado").slideDown("slow");
+                    $("#caixaNome").focus();
+
+                },
+                erro: function(){
+                    alert("Erro ao enviar solicitação!");
+                    
+                }
+            });
+            
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="estilo.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <img src="pref_sp.png" id="logo_pref"> <br> <br>
+    <img src="portal.png" id="novo_sol"> <br> <br>
+
+    <button id="btnAbrir">Abrir protocolo</button>
+    <button id="btnConsultar">Consultar protocolo</button>
+
+    <script>
+        $("#btnAbrir").click(function(){
+            window.location.href = "nova.html";
+        });
+        $("#btnConsultar").click(function(){
+            window.location.href = "pesquisar.html";
+        });
+    </script>
+    
+</body>
+</html>
